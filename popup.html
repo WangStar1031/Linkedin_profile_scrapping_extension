@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body{ width: 400px; color: darkgray; margin: 0px; padding: 0px; }
+      .Header{ margin-top: 70px; }
+      .Header img{ width: 100px; }
+      .Header, .Explain, .Explain p, .Buttons{ text-align: center; }
+      .Buttons{ margin-top: 50px; margin-bottom: 20px; }
+      .Header p{ font-size: 1.5em; }
+      .Explain p{ font-size: 15px; margin: 7px; }
+      .Upper a{ text-decoration: none; color: darkgray; }
+      .Upper a span{ margin-left: 20px; position: relative; top: -10px; font-size: 15px;}
+      .Scrap{ margin: 20px; }
+      .ScrapData table{ width: 100%; font-size: 15px;}
+      .ScrapData table tr td input{ width: 100%; font-size: 20px; border-radius: 3px; border: 1px solid darkgray; }
+
+      .BtnClear{ margin-left: 45%; color: black; cursor: pointer; }
+      .BtnCollect{ margin-left: 15%; color: #4da1ff; cursor: pointer; }
+      .HideItem{ display: none; }
+      .WorkDone{ background-color: #f2f8ff; color: #7ebbff; }
+      .PaymentError{ background-color: #ffe4e4; color: #ff7e7e; }
+      .WorkDone, .PaymentError{ border-radius: 5px; padding: 10px; }
+      .close{ float: right; cursor: pointer; }
+      .BtnSetting{ text-align: center; }
+      .BtnSetting a{ text-decoration: none; color: darkgray; font-size: 15px; }
+      .BtnSetting a span{ margin-right: 10px; top: 4px; position: relative; margin-left: 10px; }
+      .BtnSend a{ left: 40%; width: 20%; position: relative; text-decoration: none; background-color: #4da1ff; padding: 7px 35px 7px 35px; color: white; font-weight: bold; border-radius: 5px;  }
+
+      .SignUp{ display: none; }
+
+    </style>
+  </head>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <body>
+    <div class="SignUp">
+      <div class="Header">
+        <img src="images/get_started128.png">
+        <p><strong>Lead</strong> swami</p>
+      </div>
+      <div class="Explain">
+          <p>Lorem ipsum dolor sit amet, consectetur</p>
+          <p>adipiscing elit. Phasellus egestas tincidunt</p>
+          <p>arcu, dictum auctor sem. Mauris accumsan</p>
+          <p>arcu id retrum vulputate. Quisque in urna id</p>
+          <p>sapien maximus tristique. Duis fermentum</p>
+          <p>arcused ante pulvinar, vitae consectetur</p>
+          <p>tortor ultrices.</p>
+      </div>
+      <div class="Buttons">
+        <a href="#"><img src="images/signup.png"></a>
+      </div>
+    </div>
+    <div class="Scrap">
+      <div class="Upper">
+        <a href="mytest.com:8000" target="_blank"><img src="images/get_started32.png"><span><strong>Lead</strong> swami</span></a>
+      </div>
+      <div class="ScrapData">
+        <table>
+          <tr>
+            <td>Name</td><td><input type="text" name="name"></td>
+          </tr>
+          <tr>
+            <td>LastName</td><td><input type="text" name="lastname"></td>
+          </tr>
+          <tr>
+            <td>Headline</td><td><input type="text" name="headline"></td>
+          </tr>
+          <tr>
+            <td>Location</td><td><input type="text" name="location"></td>
+          </tr>
+          <tr>
+            <td>Linkedin URL</td><td><input type="text" name="url"></td>
+          </tr>
+          <tr>
+            <td>Email</td><td><input type="text" name="email"></td>
+          </tr>
+          <tr>
+            <td>Phone Number</td><td><input type="text" name="phonenumber"></td>
+          </tr>
+          <tr>
+            <td>Last Job</td><td><input type="text" name="lastjob"></td>
+          </tr>
+          <tr>
+            <td>Twitter</td><td><input type="text" name="twitter"></td>
+          </tr>
+          <tr>
+            <td>Site</td><td><input type="text" name="site"></td>
+          </tr>
+          <tr>
+            <td>Tag</td><td><input type="text" name="tag"></td>
+          </tr>
+        </table>
+        <p><span class="BtnClear">CLEAR</span><span class="BtnCollect">COLLECT</span></p>
+        <p class="WorkDone HideItem"><span class="message">Yep! Work is done. Enjoy yourself.</span><span class="close">x</span></p>
+        <p class="PaymentError HideItem"><span class="message">Error. Please check your payment.</span><span class="close">x</span></p>
+        <div style="clear: both;"></div>
+        <p>
+          <span class="BtnSetting">
+            <a href="mytest.com:8000" target="_blank"><span><img src="images/setting.png"></span>Setting</a>
+          </span>
+          <span class="BtnSend">
+            <a href="#">SEND</a>
+          </span>
+        </p>
+      </div>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>
