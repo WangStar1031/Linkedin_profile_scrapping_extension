@@ -63,9 +63,10 @@ var BtnPayErrorClose = document.getElementsByClassName('PaymentError')[0].getEle
 BtnPayErrorClose.onclick = function(element){
 	$(".PaymentError").addClass("HideItem");
 }
-var objProfile = {strName:'', strLastName:'', strHeadLine:'', strLocation:'', strProfile:'', strEmail:'', strImgUrl:'', strTwitter:'', strPhoneNumber:'', strLastJob:'', strSite:''};
+var objProfile = {strName:'', strLastName:'', strHeadLine:'', strLocation:'', strProfile:'', strEmail:'', strImgUrl:'', strTwitter:'', strPhoneNumber:'', strLastJob:'', strSite:'', strTag:''};
 var BtnSend = document.getElementsByClassName('BtnSend')[0];
 BtnSend.onclick = function(element){
+	objProfile.strTag = $("input[name=tag]").val();
 	console.log(objProfile);
 	if( myEmail != ""){
 		$.ajax({
