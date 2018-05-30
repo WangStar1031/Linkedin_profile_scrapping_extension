@@ -1,22 +1,52 @@
 // chrome.storage.sync.set({LeadswamiAdmin: ""});
+// chrome.storage.sync.set({'SavedMyProfile': 'false'});
+var myEmail = "";
 setTimeout(function(){
 	chrome.storage.sync.get('LeadswamiAdmin', function(data){
-		if( !data.LeadswamiAdmin){
-			chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-				chrome.tabs.executeScript( tabs[0].id, {file: "js/jquery.min.js"});
-				chrome.tabs.executeScript( tabs[0].id, {file: "gotoMyProfilePage.js"});
-			});
-		} else{
-			chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-				chrome.tabs.executeScript( tabs[0].id, {code: "alert('Now you can scrap other`s profiles.);"});
-			});
-		}
-		console.log(data.LeadswamiAdmin);
+			if( !data.LeadswamiAdmin){
+				chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+					chrome.tabs.executeScript( tabs[0].id, {file: "js/jquery.min.js"});
+					chrome.tabs.executeScript( tabs[0].id, {file: "gotoMyProfilePage.js"});
+				});
+			} else{
+				var myData = data.LeadswamiAdmin;
+				myEmail = myData.Email;
+				chrome.storage.sync.get('SavedMyProfile', function(data){
+					if( data.SavedMyProfile == ""){
+						$.ajax({
+							type: "POST",
+							url: "http://mytest.com:8000/api/PersonalData",
+							data: {Email: myData.Email, ProfileUrl: myData.ProfileUrl, PicUrl: myData.PicUrl, Location: myData.Location},
+						}).done(function(d){
+							console.log("PersonalData");
+							console.log(d);
+							if(d.msg == 'Updated.'){
+								chrome.storage.sync.set({'SavedMyProfile': 'true'});
+							}
+						});
+					}
+				});
+				chrome.storage.sync.get('strConnectionNumber', function(data){
+					var strConNum = data.strConnectionNumber;
+					if( strConNum == ""){
+						chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+							chrome.tabs.executeScript( tabs[0].id, {file: "js/jquery.min.js"});
+							chrome.tabs.executeScript( tabs[0].id, {file: 'getMyConnectionNumber.js'});;
+						});
+					} else{
+						$.ajax({
+							type: "POST",
+							url: "http://mytest.com:8000/api/ConnectionCount",
+							data: {Email: myData.Email, ConnectionNumber: strConNum},
+						}).done(function(d){
+							console.log("ConnectionCount");
+							console.log(d);
+						});
+					}
+				});
+			}
+			console.log(data.LeadswamiAdmin);
 	});
-	// chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-	// 	chrome.tabs.executeScript( tabs[0].id, {file: "js/jquery.min.js"});
-	// 	chrome.tabs.executeScript( tabs[0].id, {file: "getMine.js"});
-	// });
 }, 200);
 
 var BtnClear = document.getElementsByClassName('BtnClear')[0];
@@ -24,7 +54,14 @@ var BtnClear = document.getElementsByClassName('BtnClear')[0];
 BtnClear.onclick = function(element){
 	$("input").val("");
 }
-
+var BtnWorkClose = document.getElementsByClassName('WorkDone')[0].getElementsByClassName('close')[0];
+BtnWorkClose.onclick = function(element){
+	$(".WorkDone").addClass("HideItem");
+}
+var BtnPayErrorClose = document.getElementsByClassName('PaymentError')[0].getElementsByClassName('close')[0];
+BtnPayErrorClose.onclick = function(element){
+	$(".PaymentError").addClass("HideItem");
+}
 var BtnCollect = document.getElementsByClassName('BtnCollect')[0];
 
 BtnCollect.onclick = function(element){
@@ -38,7 +75,6 @@ BtnCollect.onclick = function(element){
 					var arrNames = data.strName.trim().split(" ");
 					$("input[name='name']").val(arrNames.shift());
 					$("input[name='lastname']").val(arrNames.join(" "));
-
 				});
 				chrome.storage.sync.get('strHeadLine', function(data) {
 					$("input[name='headline']").val(data.strHeadLine.trim());
@@ -64,15 +100,19 @@ BtnCollect.onclick = function(element){
 				chrome.storage.sync.get('strSite', function(data) {
 					$("input[name='site']").val(data.strSite.trim());
 				});
+				setTimeout(function(){
+					if( myEmail != ""){
+						$.ajax({
+							type: "POST",
+							url: "http://mytest.com:8000/api/SaveProfiles",
+							data: {Email: myEmail, ConnectionNumber: strConNum},
+						}).done(function(d){
+							console.log("ConnectionCount");
+							console.log(d);
+						});
+					}
+				}, 500);
 			}
 		})
 	}, 1300);
 }
-			// $("input[name='headline'").val(data.strHeadLine);
-			// $("input[name='url'").val(data.strHeadLine);
-			// $("input[name='email'").val(data.strHeadLine);
-			// $("input[name='phonenumber'").val(data.strHeadLine);
-			// $("input[name='lastjob'").val(data.strHeadLine);
-			// $("input[name='twitter'").val(data.strHeadLine);
-			// $("input[name='site'").val(data.strHeadLine);
-			// $("input[name='tag'").val(data.strHeadLine);
