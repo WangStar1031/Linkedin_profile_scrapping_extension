@@ -41,11 +41,12 @@ setTimeout(function(){
 						}).done(function(d){
 							console.log("ConnectionCount");
 							console.log(d);
+							chrome.storage.sync.set({'strConnectionNumber':''});
 						});
 					}
 				});
 			}
-			console.log(data.LeadswamiAdmin);
+			// console.log(data.LeadswamiAdmin);
 	});
 }, 200);
 
@@ -62,6 +63,21 @@ var BtnPayErrorClose = document.getElementsByClassName('PaymentError')[0].getEle
 BtnPayErrorClose.onclick = function(element){
 	$(".PaymentError").addClass("HideItem");
 }
+var objProfile = {strName:'', strLastName:'', strHeadLine:'', strLocation:'', strProfile:'', strEmail:'', strImgUrl:'', strTwitter:'', strPhoneNumber:'', strLastJob:'', strSite:''};
+var BtnSend = document.getElementsByClassName('BtnSend')[0];
+BtnSend.onclick = function(element){
+	console.log(objProfile);
+	if( myEmail != ""){
+		$.ajax({
+			type: "POST",
+			url: "http://mytest.com:8000/api/SaveProfiles",
+			data: {Email: myEmail, objProfile: objProfile},
+		}).done(function(d){
+			console.log("ConnectionCount");
+			console.log(d);
+		});
+	}
+}
 var BtnCollect = document.getElementsByClassName('BtnCollect')[0];
 
 BtnCollect.onclick = function(element){
@@ -73,45 +89,46 @@ BtnCollect.onclick = function(element){
 			if( data.pageError != 'pageError'){
 				chrome.storage.sync.get('strName', function(data) {
 					var arrNames = data.strName.trim().split(" ");
-					$("input[name='name']").val(arrNames.shift());
-					$("input[name='lastname']").val(arrNames.join(" "));
+					objProfile.strName = arrNames.shift();
+					$("input[name='name']").val(objProfile.strName);
+					objProfile.strLastName = arrNames.join(" ");
+					$("input[name='lastname']").val(objProfile.strLastName);
 				});
 				chrome.storage.sync.get('strHeadLine', function(data) {
-					$("input[name='headline']").val(data.strHeadLine.trim());
+					objProfile.strHeadLine = data.strHeadLine.trim();
+					$("input[name='headline']").val(objProfile.strHeadLine);
 				});
 				chrome.storage.sync.get('strLocation', function(data) {
-					$("input[name='location']").val(data.strLocation.trim());
+					objProfile.strLocation = data.strLocation.trim();
+					$("input[name='location']").val(objProfile.strLocation);
 				});
 				chrome.storage.sync.get('strProfile', function(data) {
-					$("input[name='url']").val(data.strProfile.trim());
+					objProfile.strProfile = data.strProfile.trim();
+					$("input[name='url']").val(objProfile.strProfile);
 				});
 				chrome.storage.sync.get('strEmail', function(data) {
-					$("input[name='email']").val(data.strEmail.trim());
+					objProfile.strEmail = data.strEmail.trim();
+					$("input[name='email']").val(objProfile.strEmail);
+				});
+				chrome.storage.sync.get('strImgUrl', function(data) {
+					objProfile.strImgUrl = data.strImgUrl.trim();
 				});
 				chrome.storage.sync.get('strTwitter', function(data) {
-					$("input[name='twitter']").val(data.strTwitter.trim());
+					objProfile.strTwitter = data.strTwitter.trim();
+					$("input[name='twitter']").val(objProfile.strTwitter);
 				});
 				chrome.storage.sync.get('strPhoneNumber', function(data) {
-					$("input[name='phonenumber']").val(data.strPhoneNumber.trim());
+					objProfile.strPhoneNumber = data.strPhoneNumber.trim();
+					$("input[name='phonenumber']").val(objProfile.strPhoneNumber);
 				});
 				chrome.storage.sync.get('strLastJob', function(data) {
-					$("input[name='lastjob']").val(data.strLastJob.trim());
+					objProfile.strLastJob = data.strLastJob.trim();
+					$("input[name='lastjob']").val(objProfile.strLastJob);
 				});
 				chrome.storage.sync.get('strSite', function(data) {
-					$("input[name='site']").val(data.strSite.trim());
+					objProfile.strSite = data.strSite.trim();
+					$("input[name='site']").val(objProfile.strSite);
 				});
-				setTimeout(function(){
-					if( myEmail != ""){
-						$.ajax({
-							type: "POST",
-							url: "http://mytest.com:8000/api/SaveProfiles",
-							data: {Email: myEmail, ConnectionNumber: strConNum},
-						}).done(function(d){
-							console.log("ConnectionCount");
-							console.log(d);
-						});
-					}
-				}, 500);
 			}
 		})
 	}, 1300);

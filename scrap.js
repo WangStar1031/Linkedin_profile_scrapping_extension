@@ -30,6 +30,21 @@ else {
 	}
 	chrome.storage.sync.set({strLastJob: strLastJob});
 
+	var strImgStyle = $(".pv-top-card-section__photo").attr("style");
+	var arrStyles = strImgStyle.split(";");
+	for( var i = 0; i < arrStyles.length; i++){
+		var strStyle = arrStyles[i];
+		var arrOneStyle = strStyle.split(":");
+		if( arrOneStyle[0] == 'background-image'){
+			arrOneStyle.shift();
+			var strUrlFunc = arrOneStyle.join(':').trim();
+			var strImgUrl = strUrlFunc.replace('url("', '');
+			strImgUrl = strImgUrl.replace('")', '');
+			chrome.storage.sync.set({strImgUrl: strImgUrl});
+			break;
+		}
+	}
+
 	document.getElementsByClassName("pv-top-card-v2-section__link--contact-info")[0].click();
 
 	setTimeout(function(){
