@@ -74,8 +74,13 @@ BtnSend.onclick = function(element){
 			url: "http://mytest.com:8000/api/SaveProfiles",
 			data: {Email: myEmail, objProfile: objProfile},
 		}).done(function(d){
-			console.log("ConnectionCount");
+			console.log("SaveProfiles");
 			console.log(d);
+			if(d.msg == "Coupon Count Limited."){
+				$(".PaymentError").removeClass("HideItem");
+			} else{
+				$(".WorkDone").removeClass("HideItem");
+			}
 		});
 	}
 }
