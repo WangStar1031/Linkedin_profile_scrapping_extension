@@ -16,7 +16,14 @@ else {
 	}
 	chrome.storage.sync.set({strHeadLine: strHeadLine});
 
-	var LocationCtrl = document.getElementsByClassName("pv-top-card-section__location")[0];
+	var enInfo = $(".pv-top-card-v2-section__link--contact-info");
+	var otherInfo = $(".contact-see-more-less");
+	if( enInfo.length != 0){
+		enInfo.click();
+	} else{
+		otherInfo.click();
+	}
+	// var LocationCtrl = document.getElementsByClassName("pv-top-card-section__location")[0];
 	var strLocation = "";
 	if( LocationCtrl){
 		strLocation = LocationCtrl.innerHTML;

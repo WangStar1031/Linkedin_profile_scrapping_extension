@@ -9,7 +9,14 @@ function getMyDataMining(){
 	var strMyProfilePicUrl = $(".profile-photo-edit__preview").attr("src");
 	var strMyProfile = document.location.href;
 
-	document.getElementsByClassName("pv-top-card-v2-section__link--contact-info")[0].click();
+	var enInfo = $(".pv-top-card-v2-section__link--contact-info");
+	var otherInfo = $(".contact-see-more-less");
+	if( enInfo.length != 0){
+		enInfo.click();
+	} else{
+		otherInfo.click();
+	}
+	// document.getElementsByClassName("pv-top-card-v2-section__link--contact-info")[0].click();
 
 	setTimeout(function(){
 		var MyEmailCtrl = document.getElementsByClassName("ci-email")[0]; 
