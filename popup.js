@@ -1,6 +1,7 @@
 // chrome.storage.sync.set({LeadswamiAdmin: ""});
 // chrome.storage.sync.set({'SavedMyProfile': 'false'});
 var myEmail = "";
+var strServerUrl = "http://217.69.3.14:81";
 setTimeout(function(){
 	chrome.storage.sync.get('LeadswamiAdmin', function(data){
 			if( !data.LeadswamiAdmin){
@@ -15,7 +16,8 @@ setTimeout(function(){
 					if( data.SavedMyProfile == ""){
 						$.ajax({
 							type: "POST",
-							url: "http://mytest.com:8000/api/PersonalData",
+							url: strServerUrl + "/api/PersonalData",
+							// url: "http://mytest.com:8000/api/PersonalData",
 							data: {Email: myData.Email, ProfileUrl: myData.ProfileUrl, PicUrl: myData.PicUrl, Location: myData.Location},
 						}).done(function(d){
 							console.log("PersonalData");
@@ -36,7 +38,8 @@ setTimeout(function(){
 					} else{
 						$.ajax({
 							type: "POST",
-							url: "http://mytest.com:8000/api/ConnectionCount",
+							url: strServerUrl + "/api/ConnectionCount",
+							// url: "http://mytest.com:8000/api/ConnectionCount",
 							data: {Email: myData.Email, ConnectionNumber: strConNum},
 						}).done(function(d){
 							console.log("ConnectionCount");
@@ -71,7 +74,8 @@ BtnSend.onclick = function(element){
 	if( myEmail != ""){
 		$.ajax({
 			type: "POST",
-			url: "http://mytest.com:8000/api/SaveProfiles",
+			url: strServerUrl + "/api/SaveProfiles",
+			// url: "http://mytest.com:8000/api/SaveProfiles",
 			data: {Email: myEmail, objProfile: objProfile},
 		}).done(function(d){
 			console.log("SaveProfiles");
