@@ -16,7 +16,7 @@ function getMyDataMining(){
 	} else{
 		otherInfo.click();
 	}
-	// document.getElementsByClassName("pv-top-card-v2-section__link--contact-info")[0].click();
+	document.getElementsByClassName("pv-top-card-v2-section__link--contact-info")[0].click();
 
 	setTimeout(function(){
 		var MyEmailCtrl = document.getElementsByClassName("ci-email")[0]; 

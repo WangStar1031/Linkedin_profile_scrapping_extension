@@ -1,8 +1,9 @@
 // chrome.storage.sync.set({LeadswamiAdmin: ""});
 // chrome.storage.sync.set({'SavedMyProfile': 'false'});
 var myEmail = "";
-// var strServerUrl = "http://217.69.3.14:81";
-var strServerUrl = "http://mytest.com:8000";
+var strServerUrl = "http://217.69.3.14:81";
+var myData;
+// var strServerUrl = "http://mytest.com:8000";
 setTimeout(function(){
 	chrome.storage.sync.get('LeadswamiAdmin', function(data){
 			if( !data.LeadswamiAdmin){
@@ -11,7 +12,7 @@ setTimeout(function(){
 					chrome.tabs.executeScript( tabs[0].id, {file: "gotoMyProfilePage.js"});
 				});
 			} else{
-				var myData = data.LeadswamiAdmin;
+				myData = data.LeadswamiAdmin;
 				myEmail = myData.Email;
 				chrome.storage.sync.get('SavedMyProfile', function(data){
 					if( data.SavedMyProfile == ""){
@@ -89,6 +90,10 @@ BtnSend.onclick = function(element){
 		});
 	}
 }
+var BtnClsCache = document.getElementById('ClsCache');
+BtnClsCache.onclick = function(){
+	chrome.storage.sync.set({LeadswamiAdmin: ""});
+}
 var BtnCollect = document.getElementsByClassName('BtnCollect')[0];
 
 BtnCollect.onclick = function(element){
@@ -114,30 +119,30 @@ BtnCollect.onclick = function(element){
 					$("input[name='location']").val(objProfile.strLocation);
 				});
 				chrome.storage.sync.get('strProfile', function(data) {
-					objProfile.strProfile = data.strProfile.trim();
+					objProfile.strProfile = ( data.strProfile == '' ? '' : data.strProfile.trim());
 					$("input[name='url']").val(objProfile.strProfile);
 				});
 				chrome.storage.sync.get('strEmail', function(data) {
-					objProfile.strEmail = data.strEmail.trim();
+					objProfile.strEmail = ( data.strEmail == '' ? '' : data.strEmail.trim());
 					$("input[name='email']").val(objProfile.strEmail);
 				});
 				chrome.storage.sync.get('strImgUrl', function(data) {
-					objProfile.strImgUrl = data.strImgUrl.trim();
+					objProfile.strImgUrl = ( data.strImgUrl == '' ? '' : data.strImgUrl.trim());
 				});
 				chrome.storage.sync.get('strTwitter', function(data) {
-					objProfile.strTwitter = data.strTwitter.trim();
+					objProfile.strTwitter = ( data.strTwitter == '' ? '' : data.strTwitter.trim());
 					$("input[name='twitter']").val(objProfile.strTwitter);
 				});
 				chrome.storage.sync.get('strPhoneNumber', function(data) {
-					objProfile.strPhoneNumber = data.strPhoneNumber.trim();
+					objProfile.strPhoneNumber = ( data.strPhoneNumber == '' ? '' : data.strPhoneNumber.trim());
 					$("input[name='phonenumber']").val(objProfile.strPhoneNumber);
 				});
 				chrome.storage.sync.get('strLastJob', function(data) {
-					objProfile.strLastJob = data.strLastJob.trim();
+					objProfile.strLastJob = ( data.strLastJob == '' ? '' : data.strLastJob.trim());
 					$("input[name='lastjob']").val(objProfile.strLastJob);
 				});
 				chrome.storage.sync.get('strSite', function(data) {
-					objProfile.strSite = data.strSite.trim();
+					objProfile.strSite = ( data.strSite == '' ? '' : data.strSite.trim());
 					$("input[name='site']").val(objProfile.strSite);
 				});
 			}

@@ -16,14 +16,7 @@ else {
 	}
 	chrome.storage.sync.set({strHeadLine: strHeadLine});
 
-	var enInfo = $(".pv-top-card-v2-section__link--contact-info");
-	var otherInfo = $(".contact-see-more-less");
-	if( enInfo.length != 0){
-		enInfo.click();
-	} else{
-		otherInfo.click();
-	}
-	// var LocationCtrl = document.getElementsByClassName("pv-top-card-section__location")[0];
+	var LocationCtrl = document.getElementsByClassName("pv-top-card-section__location")[0];
 	var strLocation = "";
 	if( LocationCtrl){
 		strLocation = LocationCtrl.innerHTML;
@@ -51,7 +44,13 @@ else {
 			break;
 		}
 	}
-
+	var enInfo = $(".pv-top-card-v2-section__link--contact-info");
+	var otherInfo = $(".contact-see-more-less");
+	if( enInfo.length != 0){
+		enInfo.click();
+	} else{
+		otherInfo.click();
+	}
 	document.getElementsByClassName("pv-top-card-v2-section__link--contact-info")[0].click();
 
 	setTimeout(function(){
