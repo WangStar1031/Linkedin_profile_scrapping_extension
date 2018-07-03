@@ -31,6 +31,7 @@ else {
 	chrome.storage.sync.set({strLastJob: strLastJob});
 
 	var strImgStyle = $(".pv-top-card-section__photo").attr("style");
+	chrome.storage.sync.set({strImgUrl: ""});
 	var arrStyles = strImgStyle.split(";");
 	for( var i = 0; i < arrStyles.length; i++){
 		var strStyle = arrStyles[i];

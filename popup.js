@@ -1,9 +1,9 @@
 // chrome.storage.sync.set({LeadswamiAdmin: ""});
 // chrome.storage.sync.set({'SavedMyProfile': 'false'});
 var myEmail = "";
-var strServerUrl = "http://217.69.3.14:81";
+// var strServerUrl = "http://217.69.3.14:81";
 var myData;
-// var strServerUrl = "http://mytest.com:8000";
+var strServerUrl = "http://mytest.com:8000";
 setTimeout(function(){
 	chrome.storage.sync.get('LeadswamiAdmin', function(data){
 			if( !data.LeadswamiAdmin){
