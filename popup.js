@@ -1,9 +1,10 @@
 // chrome.storage.sync.set({LeadswamiAdmin: ""});
 // chrome.storage.sync.set({'SavedMyProfile': 'false'});
 var myEmail = "";
-var strServerUrl = "http://217.69.3.14:81";
+// var strServerUrl = "http://217.69.3.14:81";
 var myData;
-// var strServerUrl = "http://127.0.0.1:8000";
+var strServerUrl = "http://127.0.0.1:8000";
+$(".Upper a").attr("href", strServerUrl);
 setTimeout(function(){
 	chrome.storage.sync.get('LeadswamiAdmin', function(data){
 			if( !data.LeadswamiAdmin){
@@ -19,11 +20,8 @@ setTimeout(function(){
 						$.ajax({
 							type: "POST",
 							url: strServerUrl + "/api/PersonalData",
-							// url: "http://mytest.com:8000/api/PersonalData",
 							data: {Email: myData.Email, ProfileUrl: myData.ProfileUrl, PicUrl: myData.PicUrl, Location: myData.Location},
 						}).done(function(d){
-							console.log("PersonalData");
-							console.log(d);
 							if(d.msg == 'Updated.'){
 								chrome.storage.sync.set({'SavedMyProfile': 'true'});
 							}
@@ -41,17 +39,13 @@ setTimeout(function(){
 						$.ajax({
 							type: "POST",
 							url: strServerUrl + "/api/ConnectionCount",
-							// url: "http://mytest.com:8000/api/ConnectionCount",
 							data: {Email: myData.Email, ConnectionNumber: strConNum},
 						}).done(function(d){
-							console.log("ConnectionCount");
-							console.log(d);
 							chrome.storage.sync.set({'strConnectionNumber':''});
 						});
 					}
 				});
 			}
-			// console.log(data.LeadswamiAdmin);
 	});
 }, 200);
 
@@ -71,8 +65,8 @@ BtnPayErrorClose.onclick = function(element){
 var objProfile = {strName:'', strLastName:'', strHeadLine:'', strLocation:'', strProfile:'', strEmail:'', strImgUrl:'', strTwitter:'', strPhoneNumber:'', strLastJob:'', strSite:'', strTag:''};
 var BtnSend = document.getElementsByClassName('BtnSend')[0];
 BtnSend.onclick = function(element){
+	$(".imgSending").removeClass("HideItem");
 	objProfile.strTag = $("input[name=tag]").val();
-	console.log(objProfile);
 	if( myEmail != ""){
 		$.ajax({
 			type: "POST",
@@ -80,8 +74,7 @@ BtnSend.onclick = function(element){
 			// url: "http://mytest.com:8000/api/SaveProfiles",
 			data: {Email: myEmail, objProfile: objProfile},
 		}).done(function(d){
-			console.log("SaveProfiles");
-			console.log(d);
+			$(".imgSending").addClass("HideItem");
 			if(d.msg == "Coupon Count Limited."){
 				$(".PaymentError").removeClass("HideItem");
 			} else{

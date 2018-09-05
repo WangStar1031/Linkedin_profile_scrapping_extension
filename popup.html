@@ -24,37 +24,18 @@
       .close{ float: right; cursor: pointer; }
       .BtnSetting{ text-align: center; }
       .BtnSetting a{ text-decoration: none; color: darkgray; font-size: 15px; }
-      .BtnSetting a span{ margin-right: 10px; top: 4px; position: relative; margin-left: 10px; }
-      .BtnSend a{ left: 40%; width: 20%; position: relative; text-decoration: none; background-color: #4da1ff; padding: 7px 35px 7px 35px; color: white; font-weight: bold; border-radius: 5px;  }
-
-      .SignUp{ display: none; }
+      .BtnSetting a span{ margin-right: 10px; top: 4px; position: relative; }
+      .BtnSend a{ float: right; position: relative; text-decoration: none; background-color: #4da1ff; padding: 7px 35px 7px 35px; color: white; font-weight: bold; border-radius: 5px;  }
+      .BtnSend:hover, .BtnSetting:hover, .BtnClear:hover, .BtnCollect:hover, #ClsCache:hover, .Upper a:hover{ opacity: 0.6; }
       #ClsCache{ cursor: pointer; }
+      .imgSending{ width: 64px; position: absolute; margin-top: -5px; margin-left: 10em;}
     </style>
   </head>
   <script type="text/javascript" src="js/jquery.min.js"></script>
   <body>
-    <div class="SignUp">
-      <div class="Header">
-        <img src="images/get_started128.png">
-        <p><strong>Lead</strong> swami</p>
-
-      </div>
-      <div class="Explain">
-          <p>Lorem ipsum dolor sit amet, consectetur</p>
-          <p>adipiscing elit. Phasellus egestas tincidunt</p>
-          <p>arcu, dictum auctor sem. Mauris accumsan</p>
-          <p>arcu id retrum vulputate. Quisque in urna id</p>
-          <p>sapien maximus tristique. Duis fermentum</p>
-          <p>arcused ante pulvinar, vitae consectetur</p>
-          <p>tortor ultrices.</p>
-      </div>
-      <div class="Buttons">
-        <a href="#"><img src="images/signup.png"></a>
-      </div>
-    </div>
     <div class="Scrap">
       <div class="Upper">
-        <a href="http://217.69.3.14:81" target="_blank"><img src="images/get_started32.png"><span><strong>Lead</strong> swami</span></a><span style="float: right;" id="ClsCache">Clear Cache</span>
+        <a target="_blank"><img src="images/get_started32.png"><span><strong>Lead</strong> swami</span></a><span style="float: right;" id="ClsCache">Clear Cache</span>
       </div>
       <div class="ScrapData">
         <table>
@@ -100,6 +81,7 @@
           <span class="BtnSetting">
             <a href="http://217.69.3.14:81" target="_blank"><span><img src="images/setting.png"></span>Setting</a>
           </span>
+          <img class="imgSending HideItem" src="images/Loading_icon.gif">
           <span class="BtnSend">
             <a href="#">SEND</a>
           </span>
