@@ -54,7 +54,10 @@ else {
 	}
 	document.getElementsByClassName("pv-top-card-v2-section__link--contact-info")[0].click();
 
-	setTimeout(function(){
+	var myInt = setInterval(function(){
+		if( !document.getElementsByClassName("ci-vanity-url")[0])
+			return;
+		clearInterval(myInt);
 		var strProfile = document.getElementsByClassName("ci-vanity-url")[0].getElementsByTagName("a")[0].getAttribute("href");
 		chrome.storage.sync.set({strProfile: strProfile});
 
@@ -87,6 +90,5 @@ else {
 		chrome.storage.sync.set({strSite: strSite});
 
 		document.getElementsByClassName("artdeco-dismiss")[0].click();
-
-	}, 300);
+	}, 50);
 }
